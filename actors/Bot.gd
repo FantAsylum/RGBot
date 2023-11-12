@@ -31,18 +31,17 @@ func _process(delta):
 	if (Input.is_action_pressed("move_down")):
 		velocity.y += base_y_velocity * VELOCITY_Y_MODIFIER
 	
-	# TODO: make it smoother
-	if (velocity.y < 0 and global_position.y <= top_height):
-		velocity.y = 0
-	if (velocity.y > 0 and global_position.y >= bottom_height):
-		velocity.y = 0
-	
 	if  (velocity.y == 0):
 		var diff = middle_height - global_position.y
 		if (diff > base_y_velocity / 5.):
 			velocity.y = sign(diff) * base_y_velocity * VELOCITY_Y_MODIFIER
 		else:
 			velocity.y = diff * VELOCITY_Y_MODIFIER
+			
+	if (velocity.y < 0 and global_position.y <= top_height):
+		velocity.y = 0
+	if (velocity.y > 0 and global_position.y >= bottom_height):
+		velocity.y = 0
 	
 	move_and_slide()
 
