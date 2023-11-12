@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqo08wa0k48qn"]
+
+[ext_resource type="Script" path="res://actors/Bot.gd" id="1_ass0f"]
+[ext_resource type="Shader" path="res://shaders/bot.gdshader" id="2_p25dw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0l0w"]
+shader = ExtResource("2_p25dw")
+shader_parameter/bot_color = null
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ojimt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fgel"]
+size = Vector2(138, 138)
+
+[node name="Bot" type="CharacterBody2D"]
+position = Vector2(228, 320)
+script = ExtResource("1_ass0f")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_b0l0w")
+scale = Vector2(137, 137)
+texture = SubResource("PlaceholderTexture2D_ojimt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5fgel")

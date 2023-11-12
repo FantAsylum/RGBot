@@ -1,12 +1,14 @@
 extends CharacterBody2D
+class_name Bot
 
-const VELOCITY_MODIFIER = 10.
+const VELOCITY_X = 500.
+const VELOCITY_Y_MODIFIER = 10.
 
 @onready var sprite: Sprite2D = $Sprite
 var top_height: float
 var middle_height: float
 var bottom_height: float
-var base_velocity: float
+var base_y_velocity: float
 
 var rng = RandomNumberGenerator.new()
 
@@ -15,18 +17,19 @@ func _ready():
 	
 	var screen_size = DisplayServer.window_get_size()
 	middle_height  = screen_size.y / 2.
-	base_velocity  = middle_height / 2.
-	top_height     = middle_height - base_velocity
-	bottom_height  = middle_height + base_velocity
+	base_y_velocity  = middle_height / 2.
+	top_height     = middle_height - base_y_velocity
+	bottom_height  = middle_height + base_y_velocity
 	
 
 func _process(delta):
+	velocity.x = VELOCITY_X;
 	velocity.y = 0
 	if (Input.is_action_pressed("move_up")):
-		velocity.y -= base_velocity * VELOCITY_MODIFIER
+		velocity.y -= base_y_velocity * VELOCITY_Y_MODIFIER
 
 	if (Input.is_action_pressed("move_down")):
-		velocity.y += base_velocity * VELOCITY_MODIFIER
+		velocity.y += base_y_velocity * VELOCITY_Y_MODIFIER
 	
 	# TODO: make it smoother
 	if (velocity.y < 0 and global_position.y <= top_height):
@@ -36,10 +39,10 @@ func _process(delta):
 	
 	if  (velocity.y == 0):
 		var diff = middle_height - global_position.y
-		if (diff > base_velocity / 5.):
-			velocity.y = sign(diff) * base_velocity * VELOCITY_MODIFIER
+		if (diff > base_y_velocity / 5.):
+			velocity.y = sign(diff) * base_y_velocity * VELOCITY_Y_MODIFIER
 		else:
-			velocity.y = diff * VELOCITY_MODIFIER
+			velocity.y = diff * VELOCITY_Y_MODIFIER
 	
 	move_and_slide()
 
