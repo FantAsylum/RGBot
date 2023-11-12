@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1qcso7m0pbh3"]
+[gd_scene load_steps=6 format=3 uid="uid://d1qcso7m0pbh3"]
 
 [ext_resource type="Shader" path="res://shaders/bot.gdshader" id="1_xdc5c"]
 [ext_resource type="Script" path="res://actors/Bot.gd" id="2_0cnx2"]
@@ -9,11 +9,19 @@ shader_parameter/bot_color = null
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lc01u"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fgel"]
+size = Vector2(138, 138)
+
 [node name="MainScene" type="Node2D"]
 
-[node name="Bot" type="Sprite2D" parent="."]
+[node name="Bot" type="CharacterBody2D" parent="."]
+position = Vector2(228, 320)
+script = ExtResource("2_0cnx2")
+
+[node name="Sprite" type="Sprite2D" parent="Bot"]
 material = SubResource("ShaderMaterial_b0l0w")
-position = Vector2(186, 332)
 scale = Vector2(137, 137)
 texture = SubResource("CanvasTexture_lc01u")
-script = ExtResource("2_0cnx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bot"]
+shape = SubResource("RectangleShape2D_5fgel")
