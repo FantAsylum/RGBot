@@ -1,29 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1qcso7m0pbh3"]
+[gd_scene load_steps=4 format=3 uid="uid://d1qcso7m0pbh3"]
 
 [ext_resource type="Script" path="res://scenes/MainScene.gd" id="1_4k1v8"]
 [ext_resource type="PackedScene" uid="uid://dqo08wa0k48qn" path="res://actors/bot.tscn" id="1_wg751"]
-[ext_resource type="Shader" path="res://shaders/barrier.gdshader" id="2_ftak2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6vra"]
-shader = ExtResource("2_ftak2")
-shader_parameter/firstColor = Color(1, 0, 0, 1)
-shader_parameter/secondColor = Color(0, 1, 0, 1)
-shader_parameter/thirdColor = Color(0, 0, 1, 1)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1mvba"]
+[ext_resource type="Script" path="res://managers/BarrierManager.gd" id="4_i4ctm"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_4k1v8")
 
 [node name="Bot" parent="." instance=ExtResource("1_wg751")]
 
-[node name="Barrier" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Barrier"]
-material = SubResource("ShaderMaterial_t6vra")
-position = Vector2(661, 325)
-scale = Vector2(74.037, 647)
-texture = SubResource("PlaceholderTexture2D_1mvba")
-
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(578, 327)
+position = Vector2(577, 324)
+
+[node name="BarrierManager" type="Node2D" parent="."]
+position = Vector2(577, 324)
+script = ExtResource("4_i4ctm")
+
+[node name="CurrentBarrierPosition" type="Marker2D" parent="BarrierManager"]
+
+[node name="NextBarrierPosition" type="Marker2D" parent="BarrierManager"]
+position = Vector2(500, 0)
