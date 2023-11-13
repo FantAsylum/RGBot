@@ -4,6 +4,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t6vra"]
 shader = ExtResource("1_ll51b")
+shader_parameter/projector_size = 0.02
 shader_parameter/firstColor = Color(1, 0, 0, 1)
 shader_parameter/secondColor = Color(0, 1, 0, 1)
 shader_parameter/thirdColor = Color(0, 0, 1, 1)
