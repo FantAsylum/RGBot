@@ -10,6 +10,7 @@ signal barrier_is_entered(color_number: int)
 @onready var next_barrier_position = $NextBarrierPosition
 
 var distance_between: float
+var barriers: Array[Node2D]
 
 func _ready():
 	distance_between = next_barrier_position.position.x - current_barrier_position.position.x
@@ -26,5 +27,13 @@ func spawn_barrier():
 	next_barrier_position.position.x += distance_between
 	
 	instance.connect("barrier_is_entered", 
-					 func(color_number):
+					 func(barrier, color_number):
+						if barrier == barriers[barrier_count / 2]:
+							spawn_barrier()
 						emit_signal("barrier_is_entered", color_number))
+	
+	if len(barriers) == barrier_count:
+		barriers[0].queue_free()
+		barriers.remove_at(0)
+	
+	barriers.push_back(instance)

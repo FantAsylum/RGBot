@@ -2,7 +2,7 @@ extends Node2D
 
 # TODO: allow enter only one time?
 # TODO: blend colors of bot and barrier?
-signal barrier_is_entered(color_number: int)
+signal barrier_is_entered(barrier: Node, color_number: int)
 
 
 @onready var sprite = $Sprite
@@ -20,12 +20,12 @@ func _ready():
 
 
 func _on_first_color_body_entered(body):
-	emit_signal("barrier_is_entered", color_numbers[0])
+	emit_signal("barrier_is_entered", self, color_numbers[0])
 
 
 func _on_second_color_body_entered(body):
-	emit_signal("barrier_is_entered", color_numbers[1])
+	emit_signal("barrier_is_entered", self, color_numbers[1])
 
 
 func _on_third_color_body_entered(body):
-	emit_signal("barrier_is_entered", color_numbers[2])
+	emit_signal("barrier_is_entered", self, color_numbers[2])
