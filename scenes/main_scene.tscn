@@ -20,3 +20,5 @@ script = ExtResource("4_i4ctm")
 
 [node name="NextBarrierPosition" type="Marker2D" parent="BarrierManager"]
 position = Vector2(500, 0)
+
+[connection signal="barrier_is_entered" from="BarrierManager" to="." method="_on_barrier_manager_barrier_is_entered"]

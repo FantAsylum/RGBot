@@ -10,7 +10,7 @@ shader_parameter/bot_color = null
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ojimt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fgel"]
-size = Vector2(138, 138)
+size = Vector2(73, 72.5)
 
 [node name="Bot" type="CharacterBody2D"]
 position = Vector2(228, 320)
@@ -18,8 +18,9 @@ script = ExtResource("1_ass0f")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_b0l0w")
-scale = Vector2(137, 137)
+scale = Vector2(73, 73)
 texture = SubResource("PlaceholderTexture2D_ojimt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_5fgel")

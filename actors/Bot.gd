@@ -12,8 +12,10 @@ var base_y_velocity: float
 
 var rng = RandomNumberGenerator.new()
 
+var current_color_number: int
+
 func _ready():
-	sprite.material.set_shader_parameter("bot_color", random_color())
+	set_random_color()
 	
 	var screen_size = DisplayServer.window_get_size()
 	middle_height   = screen_size.y / 2.
@@ -45,5 +47,12 @@ func _process(delta):
 	
 	move_and_slide()
 
-func random_color():
-	return ColorManager.color_by_number[rng.randi() % 3]
+func set_random_color():
+	# TODO: should it be set to different color or the same is ok?
+	set_color(rng.randi() % 3)
+
+func set_color(color_number: int):
+	current_color_number = color_number
+	var color = ColorManager.color_by_number[color_number]
+	sprite.material.set_shader_parameter("bot_color", color)
+	

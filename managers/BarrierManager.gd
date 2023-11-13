@@ -1,5 +1,7 @@
 extends Node2D
 
+signal barrier_is_entered(color_number: int)
+
 @export var barrier_scene: PackedScene = preload("res://objects/barrier.tscn")
 
 @export var barrier_count = 5
@@ -22,3 +24,7 @@ func spawn_barrier():
 	instance.position = current_barrier_position.position
 	current_barrier_position.position = next_barrier_position.position
 	next_barrier_position.position.x += distance_between
+	
+	instance.connect("barrier_is_entered", 
+					 func(color_number):
+						emit_signal("barrier_is_entered", color_number))

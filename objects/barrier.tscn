@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://55oevnnfe5i3"]
+[gd_scene load_steps=6 format=3 uid="uid://55oevnnfe5i3"]
 
 [ext_resource type="Shader" path="res://shaders/barrier.gdshader" id="1_ll51b"]
 [ext_resource type="Script" path="res://objects/barrier.gd" id="1_rg4p3"]
@@ -12,6 +12,9 @@ shader_parameter/thirdColor = Color(0, 0, 1, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1mvba"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q60y"]
+size = Vector2(74, 181)
+
 [node name="Barrier" type="Node2D"]
 script = ExtResource("1_rg4p3")
 
@@ -19,3 +22,24 @@ script = ExtResource("1_rg4p3")
 material = SubResource("ShaderMaterial_t6vra")
 scale = Vector2(74.037, 647)
 texture = SubResource("PlaceholderTexture2D_1mvba")
+
+[node name="FirstColor" type="Area2D" parent="."]
+position = Vector2(0, -181)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="FirstColor"]
+shape = SubResource("RectangleShape2D_6q60y")
+
+[node name="SecondColor" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="SecondColor"]
+shape = SubResource("RectangleShape2D_6q60y")
+
+[node name="ThirdColor" type="Area2D" parent="."]
+position = Vector2(0, 181)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="ThirdColor"]
+shape = SubResource("RectangleShape2D_6q60y")
+
+[connection signal="body_entered" from="FirstColor" to="." method="_on_first_color_body_entered"]
+[connection signal="body_entered" from="SecondColor" to="." method="_on_second_color_body_entered"]
+[connection signal="body_entered" from="ThirdColor" to="." method="_on_third_color_body_entered"]
