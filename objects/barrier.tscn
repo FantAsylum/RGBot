@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://55oevnnfe5i3"]
+[gd_scene load_steps=5 format=3 uid="uid://55oevnnfe5i3"]
 
 [ext_resource type="Shader" path="res://shaders/barrier.gdshader" id="1_ll51b"]
+[ext_resource type="Script" path="res://objects/barrier.gd" id="1_rg4p3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t6vra"]
 shader = ExtResource("1_ll51b")
@@ -12,8 +13,9 @@ shader_parameter/thirdColor = Color(0, 0, 1, 1)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1mvba"]
 
 [node name="Barrier" type="Node2D"]
+script = ExtResource("1_rg4p3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_t6vra")
 scale = Vector2(74.037, 647)
 texture = SubResource("PlaceholderTexture2D_1mvba")
