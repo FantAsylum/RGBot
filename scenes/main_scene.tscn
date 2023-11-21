@@ -1,16 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1qcso7m0pbh3"]
+[gd_scene load_steps=7 format=3 uid="uid://d1qcso7m0pbh3"]
 
 [ext_resource type="Script" path="res://scenes/MainScene.gd" id="1_4k1v8"]
 [ext_resource type="PackedScene" uid="uid://dqo08wa0k48qn" path="res://actors/bot.tscn" id="1_wg751"]
+[ext_resource type="Shader" path="res://shaders/background.gdshader" id="2_0j780"]
 [ext_resource type="Script" path="res://managers/BarrierManager.gd" id="4_i4ctm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wc6ea"]
+shader = ExtResource("2_0j780")
+shader_parameter/position = 0.0
+shader_parameter/cameraZ = -2.0
+shader_parameter/farZ = 2.0
+shader_parameter/farY = 0.5
+shader_parameter/nearZ = -1.0
+shader_parameter/distanceBetweenLines = 0.25
+shader_parameter/linesCount = 10
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_n2gf5"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_4k1v8")
 
-[node name="Bot" parent="." instance=ExtResource("1_wg751")]
-
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(577, 324)
+
+[node name="Background" type="Sprite2D" parent="Camera"]
+material = SubResource("ShaderMaterial_wc6ea")
+position = Vector2(-1.00006, -2)
+scale = Vector2(1152, 644)
+texture = SubResource("PlaceholderTexture2D_n2gf5")
+
+[node name="Bot" parent="." instance=ExtResource("1_wg751")]
 
 [node name="BarrierManager" type="Node2D" parent="."]
 position = Vector2(577, 324)
