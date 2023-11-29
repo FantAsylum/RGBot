@@ -10,13 +10,14 @@ float circle(vec2 uv, float r) {
 }
 
 float ellipse(vec2 uv, float a, float b) {
-	return 1. - step(1., uv.x / a + uv.y / b);
+	return 1. - step(1., (uv.x * uv.x) / (a * a) + 
+	                     (uv.y * uv.y) / (b * b));
 }
 
 // TODO: add "mouth"
-// TODO: add engines
 // TODO: add flames
 // TODO: add glowing
+// TODO: detalize engine internals (colors? more ellipses - inside)
 // TODO: gradient?
 
 void fragment() {
@@ -35,11 +36,29 @@ void fragment() {
 		uv -= 0.5;
 		
 		float mask = 0.;
+		
+		// eye
 		vec2 uv2 = uv;
 		uv2.x -= 0.25;
 		uv2.y += 0.125;
-		mask = circle(uv2, 0.125);
+		mask += circle(uv2, 0.125);
 		COLOR += mask * bot_color;
+		
+		// top engine
+		uv2 = uv;
+		uv2.y += 0.35;
+		mask += ellipse(uv2, 0.25, .1);
+		
+		// bottom engine
+		uv2 = uv;
+		uv2.y -= 0.35;
+		mask += ellipse(uv2, 0.25, .1);
+		
+		// left engine
+		uv2 = uv;
+		uv2.x += 0.35;
+		mask += ellipse(uv2.yx, 0.25, .1);
+		
 		if (mask == 0.) {
 			mask = circle(uv, 0.5);
 			COLOR = mask * vec4(silver, 1.);
